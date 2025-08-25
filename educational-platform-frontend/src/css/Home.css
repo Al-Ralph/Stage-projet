@@ -1,0 +1,484 @@
+/* ===== STYLES PAGE HOME AMÉLIORÉS ===== */
+/* Les animations sont maintenant centralisées dans animations.css */
+
+/* ===== STYLES PAGE HOME AMÉLIORÉS ===== */
+
+/* Container principal */
+.home-container {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  box-sizing: border-box;
+}
+
+/* Header */
+.home-header {
+  animation: fadeInDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+.home-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.home-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+}
+
+.home-filters {
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Grille des filtres */
+.home-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  align-items: end;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Contenu principal */
+.home-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 100%;
+}
+
+.home-course-card {
+  animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-course-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(102, 126, 234, 0.1) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.home-course-card:hover::before {
+  opacity: 1;
+}
+
+.home-course-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 
+    0 20px 40px rgba(102, 126, 234, 0.2),
+    0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.home-course-card:nth-child(odd) {
+  animation-delay: 0.1s;
+}
+
+.home-course-card:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+.home-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.home-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.home-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.home-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 30px rgba(102, 126, 234, 0.5),
+    0 5px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.home-button:active {
+  animation: pulse 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(-1px) scale(0.98);
+}
+
+.home-input, .home-select {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+
+.home-input:focus, .home-select:focus {
+  border-color: var(--primary-color) !important;
+  background-color: white !important;
+  box-shadow: 
+    0 0 0 4px rgba(102, 126, 234, 0.15),
+    0 8px 25px rgba(102, 126, 234, 0.1) !important;
+  transform: translateY(-2px);
+}
+
+.home-enroll-button {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    45deg,
+    #667eea,
+    #764ba2,
+    #8e44ad,
+    #667eea
+  );
+  background-size: 300% 300%;
+  animation: gradientShift 3s ease infinite;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.home-enroll-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 15px 35px rgba(102, 126, 234, 0.4),
+    0 5px 15px rgba(0, 0, 0, 0.1) !important;
+  animation-duration: 1s;
+}
+
+.home-enroll-button:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.home-courses-grid {
+  animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-lg);
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Styles spécifiques pour les cartes de cours */
+.home-course-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 400px;
+  padding: var(--spacing-xl);
+  background: white;
+  border-radius: var(--border-radius-xl);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+/* En-tête de la carte */
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+}
+
+.course-title-section {
+  flex: 1;
+}
+
+.course-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937; /* Noir plus foncé pour un meilleur contraste */
+  margin: 0 0 var(--spacing-xs) 0;
+  line-height: 1.3;
+}
+
+.course-category {
+  display: inline-block;
+  background: var(--primary-gradient);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-lg);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Description */
+.course-description {
+  color: #374151; /* Texte plus foncé pour un meilleur contraste sur fond blanc */
+  line-height: 1.6;
+  margin-bottom: var(--spacing-lg);
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+/* Instructeur */
+.instructor {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-sm);
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: var(--border-radius-lg);
+}
+
+.instructor .avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--primary-gradient);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Métadonnées du cours */
+.course-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.course-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.course-info span {
+  color: #6b7280; /* Texte plus visible que var(--text-muted) */
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-weight: 500;
+}
+
+.course-stats {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.course-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+}
+
+/* Bouton d'inscription */
+.home-enroll-button {
+  width: 100%;
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: var(--border-radius-lg);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Logo avec effet flottant */
+.home-header .logo {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Effets sur les avatars */
+.home-course-card .avatar {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+
+.home-course-card:hover .avatar {
+  transform: scale(1.1);
+}
+
+/* Effet sur les catégories */
+.home-course-card .course-category {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.home-course-card:hover .course-category {
+  transform: scale(1.05);
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Animation pour les cartes avec stagger */
+.home-courses-grid .home-course-card:nth-child(1) { animation-delay: 0.1s; }
+.home-courses-grid .home-course-card:nth-child(2) { animation-delay: 0.2s; }
+.home-courses-grid .home-course-card:nth-child(3) { animation-delay: 0.3s; }
+.home-courses-grid .home-course-card:nth-child(4) { animation-delay: 0.4s; }
+.home-courses-grid .home-course-card:nth-child(5) { animation-delay: 0.5s; }
+.home-courses-grid .home-course-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Effet de pulsation pour les boutons */
+/* Animation pulse centralisée dans animations.css */
+
+/* Messages d'état */
+.loading, .error-message, .no-courses {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: white;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-xl);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #fecaca;
+}
+
+.no-courses {
+  background: rgba(156, 163, 175, 0.1);
+  border-color: rgba(156, 163, 175, 0.3);
+  color: #d1d5db;
+}
+
+/* ===== CORRECTIONS DE DISPOSITION ===== */
+
+/* S'assurer que tous les éléments utilisent toute la largeur */
+.home-container * {
+  box-sizing: border-box;
+}
+
+.home-header,
+.home-filters,
+.home-main-content,
+.home-courses-grid {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Forcer la largeur complète pour les cartes */
+.home-course-card {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* ===== RESPONSIVE DESIGN HOME ===== */
+
+@media (max-width: 768px) {
+  .home-header-content {
+    flex-direction: column !important;
+    gap: var(--spacing-md) !important;
+  }
+  
+  .home-filters-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .home-courses-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .home-course-meta {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: var(--spacing-sm) !important;
+  }
+  
+  /* Réduction des animations sur mobile pour les performances */
+  .home-course-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+  
+  .home-button:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Désactivation de certaines animations sur très petits écrans */
+  .home-course-card::before,
+  .home-button::before {
+    display: none;
+  }
+  
+  .home-header::before {
+    display: none;
+  }
+  
+  .home-course-card:hover .course-category {
+    animation: none;
+  }
+}
+
+/* ===== ACCESSIBILITÉ HOME ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .home-header,
+  .home-filters,
+  .home-course-card,
+  .home-courses-grid,
+  .home-header .logo {
+    animation: none !important;
+  }
+  
+  .home-enroll-button {
+    animation: none !important;
+  }
+}

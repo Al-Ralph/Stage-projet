@@ -1,0 +1,526 @@
+/* ===== STYLES PAGE PROFILE AMÉLIORÉS ===== */
+/* Les animations sont maintenant centralisées dans animations.css */
+
+/* ===== STYLES PAGE PROFILE AMÉLIORÉS ===== */
+
+/* Container principal */
+.profile-container {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  box-sizing: border-box;
+}
+
+/* Contenu principal */
+.profile-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Section profil */
+.profile-section {
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+  background: white;
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Informations du profil */
+.profile-header-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.profile-info h1 {
+  color: #1f2937; /* Noir foncé pour un bon contraste */
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.profile-email {
+  color: #6b7280; /* Gris moyen pour un bon contraste */
+  font-size: 1rem;
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.profile-role {
+  display: inline-block;
+  background: var(--primary-gradient);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-lg);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.profile-bio {
+  color: #374151; /* Texte foncé pour un bon contraste */
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Avatar */
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-gradient);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Grille des statistiques */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.stat-card {
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  text-align: center;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+  color: #6b7280; /* Gris moyen pour un bon contraste */
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Titre de section */
+.section-title {
+  color: #1f2937; /* Noir foncé pour un bon contraste */
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 var(--spacing-lg) 0;
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+}
+
+/* Grille des inscriptions */
+.enrollments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.enrollment-card {
+  animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  background: white;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.enrollment-title {
+  color: #1f2937; /* Noir foncé pour un bon contraste */
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.enrollment-progress {
+  margin-top: var(--spacing-md);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin-bottom: var(--spacing-xs);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary-gradient);
+  border-radius: var(--border-radius-sm);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  color: #6b7280; /* Gris moyen pour un bon contraste */
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Message pas de cours */
+.no-courses {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: #6b7280; /* Gris moyen pour un bon contraste */
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: var(--border-radius-xl);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.no-courses h3 {
+  color: #1f2937; /* Noir foncé pour un bon contraste */
+  margin-bottom: var(--spacing-md);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.no-courses p {
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.profile-header {
+  animation: fadeInDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  background: white;
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-xl);
+}
+
+.profile-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.nav-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.profile-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.05) 0%,
+    rgba(118, 75, 162, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+.profile-header-content {
+  animation: slideInFromLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+}
+
+.profile-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.profile-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.profile-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.profile-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 30px rgba(102, 126, 234, 0.5),
+    0 5px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.profile-button:active {
+  animation: pulse 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(-1px) scale(0.98);
+}
+
+.enrollment-card:nth-child(odd) {
+  animation-delay: 0.1s;
+}
+
+.enrollment-card:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+/* Avatar avec effet spécial */
+.profile-section .avatar {
+  animation: bounceIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.profile-section .avatar::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: spin 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile-section:hover .avatar::before {
+  opacity: 1;
+}
+
+.profile-section .avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+/* Statistiques avec animation staggered */
+.profile-section .stats-grid {
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;
+}
+
+.profile-section .stats-grid > div {
+  animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-section .stats-grid > div:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.profile-section .stats-grid > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.profile-section .stats-grid > div:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.profile-section .stats-grid > div:hover {
+  transform: translateY(-5px) scale(1.05);
+  animation: statGlow 2s ease-in-out infinite;
+}
+
+.profile-section .stats-grid > div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(102, 126, 234, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.profile-section .stats-grid > div:hover::before {
+  left: 100%;
+}
+
+/* Barres de progression améliorées */
+.progress-fill {
+  animation: progressFill 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s both;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite 1s;
+}
+
+/* Animation progressive pour les cartes d'inscription */
+.profile-section .enrollments-grid .enrollment-card:nth-child(1) { animation-delay: 0.1s; }
+.profile-section .enrollments-grid .enrollment-card:nth-child(2) { animation-delay: 0.2s; }
+.profile-section .enrollments-grid .enrollment-card:nth-child(3) { animation-delay: 0.3s; }
+.profile-section .enrollments-grid .enrollment-card:nth-child(4) { animation-delay: 0.4s; }
+.profile-section .enrollments-grid .enrollment-card:nth-child(5) { animation-delay: 0.5s; }
+.profile-section .enrollments-grid .enrollment-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Effet de pulsation pour les boutons */
+/* Animation pulse centralisée dans animations.css */
+
+/* Spinner de chargement amélioré */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+}
+
+/* Effet sur le nom du profil */
+.profile-section .profile-name {
+  background: linear-gradient(
+    135deg,
+    #1f2937 0%,
+    #667eea 50%,
+    #1f2937 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease infinite;
+}
+
+/* Animation gradientShift centralisée dans animations.css */
+
+/* Effet sur le rôle */
+.profile-section .profile-role {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.profile-section .profile-role:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* ===== RESPONSIVE DESIGN PROFILE ===== */
+
+@media (max-width: 768px) {
+  .profile-header-content {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  
+  .profile-header {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .enrollments-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Réduction des animations sur mobile pour les performances */
+  .enrollment-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .profile-section .stats-grid > div:hover {
+    transform: translateY(-2px) scale(1.02);
+  }
+  
+  .profile-section .avatar:hover {
+    transform: scale(1.02);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Désactivation de certaines animations sur très petits écrans */
+  .enrollment-card::before,
+  .profile-section .avatar::before,
+  .profile-section .stats-grid > div::before {
+    display: none;
+  }
+  
+  .profile-button::before {
+    display: none;
+  }
+  
+  .profile-section .stats-grid > div:hover {
+    animation: none;
+  }
+}
+
+/* ===== ACCESSIBILITÉ PROFILE ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-header,
+  .profile-section,
+  .profile-header-content,
+  .enrollment-card,
+  .profile-section .avatar,
+  .profile-section .stats-grid,
+  .progress-fill {
+    animation: none !important;
+  }
+  
+  .loading-spinner {
+    animation: none !important;
+  }
+  
+  .profile-section .profile-name {
+    animation: none !important;
+    background: #1f2937;
+    -webkit-text-fill-color: #1f2937;
+  }
+}

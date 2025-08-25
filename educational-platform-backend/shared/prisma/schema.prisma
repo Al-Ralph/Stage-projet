@@ -1,0 +1,419 @@
+// shared/prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  password      String
+  role          UserRole  @default(STUDENT)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  profile       Profile?
+  enrollments   Enrollment[]
+  skills        UserSkill[]
+  achievements  Achievement[]
+  interactions  UserInteraction[]
+  forumThreads  ForumThread[]
+  forumReplies  ForumReply[]
+  conversations ConversationParticipant[]
+  messages      Message[]
+  studyGroups   StudyGroupMember[]
+  preferences   UserPreference[]
+  courses       Course[]  // Cours créés par l'utilisateur (instructeur)
+  reviews       Review[]  // Avis donnés par l'utilisateur
+}
+
+model Profile {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  firstName     String?
+  lastName      String?
+  avatarUrl     String?
+  bio           String?
+  level         Int       @default(1)
+  experience    Int       @default(0)
+  learningStyle String?
+  timeZone      String    @default("UTC")
+  language      String    @default("en")
+  
+  user          User      @relation(fields: [userId], references: [id])
+}
+
+model Course {
+  id            String    @id @default(uuid())
+  title         String
+  description   String
+  thumbnailUrl  String?
+  category      String
+  level         CourseLevel
+  duration      Int       // in minutes
+  price         Decimal?
+  instructorId  String
+  isPublished   Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  instructor    User      @relation(fields: [instructorId], references: [id])
+  modules       Module[]
+  enrollments   Enrollment[]
+  reviews       Review[]
+  skills        CourseSkill[]
+  prerequisites CoursePrerequisite[]
+  prerequisiteFor CoursePrerequisite[] @relation("Prerequisite")
+  interactions  UserInteraction[]
+  forumThreads  ForumThread[]
+  studyGroups   StudyGroup[]
+}
+
+model Module {
+  id            String    @id @default(uuid())
+  courseId      String
+  title         String
+  description   String?
+  order         Int
+  
+  course        Course    @relation(fields: [courseId], references: [id])
+  lessons       Lesson[]
+}
+
+model Lesson {
+  id            String    @id @default(uuid())
+  moduleId      String
+  title         String
+  description   String?
+  videoUrl      String?
+  contentUrl    String?
+  duration      Int       // in minutes
+  order         Int
+  
+  module        Module    @relation(fields: [moduleId], references: [id])
+  progress      LessonProgress[]
+  resources     Resource[]
+  quiz          Quiz?
+}
+
+model Enrollment {
+  id            String    @id @default(uuid())
+  userId        String
+  courseId      String
+  enrolledAt    DateTime  @default(now())
+  completedAt   DateTime?
+  
+  user          User      @relation(fields: [userId], references: [id])
+  course        Course    @relation(fields: [courseId], references: [id])
+  progress      Progress?
+  certificate   Certificate?
+  
+  @@unique([userId, courseId])
+}
+
+model Progress {
+  id                String    @id @default(uuid())
+  enrollmentId      String    @unique
+  lastActivityAt    DateTime  @default(now())
+  totalTimeSpent    Int       @default(0) // in seconds
+  
+  enrollment        Enrollment @relation(fields: [enrollmentId], references: [id])
+  completedLessons  LessonProgress[]
+}
+
+model LessonProgress {
+  id            String    @id @default(uuid())
+  progressId    String
+  lessonId      String
+  completedAt   DateTime  @default(now())
+  score         Float?
+  timeSpent     Int       // in seconds
+  
+  progress      Progress  @relation(fields: [progressId], references: [id])
+  lesson        Lesson    @relation(fields: [lessonId], references: [id])
+  
+  @@unique([progressId, lessonId])
+}
+
+model Achievement {
+  id            String    @id @default(uuid())
+  userId        String
+  type          String
+  name          String
+  description   String
+  badgeUrl      String?
+  unlockedAt    DateTime  @default(now())
+  
+  user          User      @relation(fields: [userId], references: [id])
+}
+
+model UserInteraction {
+  id            String    @id @default(uuid())
+  userId        String
+  courseId      String
+  action        InteractionType
+  duration      Int?      // in seconds
+  rating        Float?
+  createdAt     DateTime  @default(now())
+  
+  user          User      @relation(fields: [userId], references: [id])
+  course        Course    @relation(fields: [courseId], references: [id])
+}
+
+model ForumThread {
+  id            String    @id @default(uuid())
+  courseId      String
+  authorId      String
+  title         String
+  content       String
+  tags          String[]
+  isPinned      Boolean   @default(false)
+  isResolved    Boolean   @default(false)
+  viewCount     Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  course        Course    @relation(fields: [courseId], references: [id])
+  author        User      @relation(fields: [authorId], references: [id])
+  replies       ForumReply[]
+}
+
+model ForumReply {
+  id            String    @id @default(uuid())
+  threadId      String
+  authorId      String
+  content       String
+  replyToId     String?
+  isAnswer      Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  thread        ForumThread @relation(fields: [threadId], references: [id])
+  author        User      @relation(fields: [authorId], references: [id])
+  replyTo       ForumReply? @relation("ReplyToReply", fields: [replyToId], references: [id])
+  replies       ForumReply[] @relation("ReplyToReply")
+}
+
+model StudyGroup {
+  id            String    @id @default(uuid())
+  name          String
+  description   String?
+  courseId      String
+  maxMembers    Int       @default(10)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  
+  course        Course    @relation(fields: [courseId], references: [id])
+  members       StudyGroupMember[]
+  sessions      StudySession[]
+}
+
+model StudyGroupMember {
+  id            String    @id @default(uuid())
+  groupId       String
+  userId        String
+  role          GroupRole @default(MEMBER)
+  joinedAt      DateTime  @default(now())
+  
+  group         StudyGroup @relation(fields: [groupId], references: [id])
+  user          User      @relation(fields: [userId], references: [id])
+  
+  @@unique([groupId, userId])
+}
+
+model Conversation {
+  id            String    @id @default(uuid())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  participants  ConversationParticipant[]
+  messages      Message[]
+}
+
+model ConversationParticipant {
+  id              String    @id @default(uuid())
+  conversationId  String
+  userId          String
+  
+  conversation    Conversation @relation(fields: [conversationId], references: [id])
+  user            User      @relation(fields: [userId], references: [id])
+  
+  @@unique([conversationId, userId])
+}
+
+model Message {
+  id              String    @id @default(uuid())
+  conversationId  String
+  senderId        String
+  content         String
+  isRead          Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  
+  conversation    Conversation @relation(fields: [conversationId], references: [id])
+  sender          User      @relation(fields: [senderId], references: [id])
+}
+
+// Modèles manquants ajoutés
+model UserSkill {
+  id            String    @id @default(uuid())
+  userId        String
+  skillName     String
+  level         Int       @default(1)
+  createdAt     DateTime  @default(now())
+  
+  user          User      @relation(fields: [userId], references: [id])
+  
+  @@unique([userId, skillName])
+}
+
+model UserPreference {
+  id            String    @id @default(uuid())
+  userId        String
+  key           String
+  value         String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  user          User      @relation(fields: [userId], references: [id])
+  
+  @@unique([userId, key])
+}
+
+model Review {
+  id            String    @id @default(uuid())
+  courseId      String
+  userId        String
+  rating        Int
+  comment       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  course        Course    @relation(fields: [courseId], references: [id])
+  user          User      @relation(fields: [userId], references: [id])
+  
+  @@unique([courseId, userId])
+}
+
+model CourseSkill {
+  id            String    @id @default(uuid())
+  courseId      String
+  skillName     String
+  level         Int       @default(1)
+  
+  course        Course    @relation(fields: [courseId], references: [id])
+  
+  @@unique([courseId, skillName])
+}
+
+model CoursePrerequisite {
+  id            String    @id @default(uuid())
+  courseId      String
+  prerequisiteCourseId String
+  
+  course        Course    @relation(fields: [courseId], references: [id])
+  prerequisite  Course    @relation("Prerequisite", fields: [prerequisiteCourseId], references: [id])
+  
+  @@unique([courseId, prerequisiteCourseId])
+}
+
+model Resource {
+  id            String    @id @default(uuid())
+  lessonId      String
+  title         String
+  type          String
+  url           String
+  description   String?
+  createdAt     DateTime  @default(now())
+  
+  lesson        Lesson    @relation(fields: [lessonId], references: [id])
+}
+
+model Quiz {
+  id            String    @id @default(uuid())
+  lessonId      String    @unique
+  title         String
+  description   String?
+  timeLimit     Int?      // in minutes
+  passingScore  Float     @default(70.0)
+  createdAt     DateTime  @default(now())
+  
+  lesson        Lesson    @relation(fields: [lessonId], references: [id])
+  questions     QuizQuestion[]
+}
+
+model QuizQuestion {
+  id            String    @id @default(uuid())
+  quizId        String
+  question      String
+  type          QuestionType
+  options       String[]
+  correctAnswer String
+  points        Int       @default(1)
+  order         Int
+  
+  quiz          Quiz      @relation(fields: [quizId], references: [id])
+}
+
+model Certificate {
+  id            String    @id @default(uuid())
+  enrollmentId  String    @unique
+  certificateNumber String @unique
+  issuedAt      DateTime  @default(now())
+  expiresAt     DateTime?
+  
+  enrollment    Enrollment @relation(fields: [enrollmentId], references: [id])
+}
+
+model StudySession {
+  id            String    @id @default(uuid())
+  groupId       String
+  title         String
+  description   String?
+  startTime     DateTime
+  endTime       DateTime?
+  maxParticipants Int?
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  
+  group         StudyGroup @relation(fields: [groupId], references: [id])
+}
+
+enum UserRole {
+  STUDENT
+  TEACHER
+  ADMIN
+}
+
+enum CourseLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum InteractionType {
+  VIEW
+  ENROLL
+  COMPLETE_LESSON
+  RATE
+  BOOKMARK
+  SHARE
+}
+
+enum GroupRole {
+  ADMIN
+  MODERATOR
+  MEMBER
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+  SHORT_ANSWER
+  ESSAY
+}

@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "npmClient": "npm",
+  "packages": [
+    "api-gateway",
+    "auth-service",
+    "user-service", 
+    "course-service",
+    "recommendation-service",
+    "progress-service",
+    "social-service",
+    "notification-service",
+    "shared"
+  ],
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "message": "chore(release): publish"
+    },
+    "bootstrap": {
+      "npmClientArgs": ["--no-package-lock"]
+    }
+  }
+} 

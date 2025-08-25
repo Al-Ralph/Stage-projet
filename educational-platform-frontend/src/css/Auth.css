@@ -1,0 +1,22 @@
+.auth-input:focus {
+  border-color: #667eea !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+.auth-button:hover {
+  transform: scale(1.02) !important;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4) !important;
+}
+
+.auth-switch:hover {
+  color: #5a67d8 !important;
+}
+
+.auth-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.auth-logo {
+  animation: bounceIn 0.8s ease-out;
+} 
